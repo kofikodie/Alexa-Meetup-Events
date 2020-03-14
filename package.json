@@ -1,0 +1,26 @@
+{
+  "name": "sls-meetup-alexa-skill",
+  "description": "",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "tsc",
+    "deploy": "npm run build && sls deploy",
+    "alexa-update": "sls alexa update",
+    "alexa-build": "sls alexa build",
+    "stop": "sls remove",
+    "pretty": " prettier --write \"src/**/*.ts\""
+  },
+  "dependencies": {
+    "ask-sdk-core": "^2.7.0",
+    "ask-sdk-model": "^1.26.0",
+    "aws-sdk": "^2.610.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.40",
+    "prettier": "^1.19.1",
+    "serverless-alexa-skills": "^0.1.0",
+    "serverless-dotenv-plugin": "^2.3.2",
+    "serverless-plugin-typescript": "^1.1.9",
+    "typescript": "^3.8.3"
+  }
+}
