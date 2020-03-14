@@ -32,11 +32,11 @@ const MeetupIntentHandler: RequestHandler = {
     );
   },
   handle(handlerInput: HandlerInput): Response {
-    const location = new Location(handlerInput.context);
-    if (location.isGeolocationSupported()) {
+    const location = new Location(handlerInput.requestEnvelope.context);
+    if (false === location.isGeolocationSupported()) {
       return handlerInput.responseBuilder
         .speak(
-          `${SKILL_NAME} vorrebbe usare la tua posizione. Per attivare la condivisione della posizione, vai alla sull' app Alexa e segui le istruzioni`
+          `${SKILL_NAME} vorrebbe usare la tua posizione. Per attivare la condivisione della posizione, vai sull' app Alexa e segui le istruzioni`
         )
         .withAskForPermissionsConsentCard([
           "alexa::devices:all:geolocation:read"
@@ -122,12 +122,12 @@ const ErrorHandler: ErrorHandler = {
 };
 
 export const meetupHandler = SkillBuilders.custom()
-    .addRequestHandlers(
-        LaunchRequestHandler,
-        MeetupIntentHandler,
-        HelpIntentHandler,
-        CancelAndStopIntentHandler,
-        SessionEndedRequestHandler
-    )
-    .addErrorHandlers(ErrorHandler)
-    .lambda();
+  .addRequestHandlers(
+    LaunchRequestHandler,
+    MeetupIntentHandler,
+    HelpIntentHandler,
+    CancelAndStopIntentHandler,
+    SessionEndedRequestHandler
+  )
+  .addErrorHandlers(ErrorHandler)
+  .lambda();
