@@ -5,6 +5,7 @@ import {
   SkillBuilders
 } from "ask-sdk-core";
 import { Response, SessionEndedRequest } from "ask-sdk-model";
+import { Location } from "./Location";
 
 const SKILL_NAME = "Meetup Events";
 
@@ -31,6 +32,17 @@ const MeetupIntentHandler: RequestHandler = {
     );
   },
   handle(handlerInput: HandlerInput): Response {
+    const location = new Location(handlerInput.context);
+    if (location.isGeolocationSupported()) {
+      return handlerInput.responseBuilder
+        .speak(
+          `${SKILL_NAME} vorrebbe usare la tua posizione. Per attivare la condivisione della posizione, vai alla sull' app Alexa e segui le istruzioni`
+        )
+        .withAskForPermissionsConsentCard([
+          "alexa::devices:all:geolocation:read"
+        ])
+        .getResponse();
+    }
     const speechText = "Sono ancora in fase di sviluppo";
 
     return handlerInput.responseBuilder
@@ -109,13 +121,13 @@ const ErrorHandler: ErrorHandler = {
   }
 };
 
-exports.meetupHandler = SkillBuilders.custom()
-  .addRequestHandlers(
-    LaunchRequestHandler,
-    MeetupIntentHandler,
-    HelpIntentHandler,
-    CancelAndStopIntentHandler,
-    SessionEndedRequestHandler
-  )
-  .addErrorHandlers(ErrorHandler)
-  .lambda();
+export const meetupHandler = SkillBuilders.custom()
+    .addRequestHandlers(
+        LaunchRequestHandler,
+        MeetupIntentHandler,
+        HelpIntentHandler,
+        CancelAndStopIntentHandler,
+        SessionEndedRequestHandler
+    )
+    .addErrorHandlers(ErrorHandler)
+    .lambda();
