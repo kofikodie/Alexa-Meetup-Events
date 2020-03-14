@@ -14,12 +14,19 @@ export class Location implements ILocation {
         !this.geoObject?.Geolocation ||
         !this.geoObject?.Geolocation?.coordinate
       ) {
-
         return false;
       }
-      return true
+      return true;
     }
 
     return false;
+  }
+
+  getLatitude(): number | undefined {
+    return this.geoObject?.Geolocation?.coordinate?.latitudeInDegrees;
+  }
+
+  getLongitude(): number | undefined {
+    return this.geoObject?.Geolocation?.coordinate?.longitudeInDegrees;
   }
 }
