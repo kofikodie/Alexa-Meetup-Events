@@ -1,4 +1,4 @@
-# Alexa Meetup Events
+# WIP Alexa Meetup Events
 
 Alexa skill to get meetup information in your area, built using the Serverless Framework and the [serverless-alexa-skills](https://github.com/marcy-terui/serverless-alexa-skills) plugin.
 
@@ -27,8 +27,6 @@ $ sls plugin install -n serverless-alexa-skills
 ```
 
 ## Set up credentials
-
-**Login with Amazon** is an OAuth2.0 single sign-on (SSO) system using your Amazon.com account.
 
 Get your credentials, by logging into the [Amazon Developer Console](https://developer.amazon.com/). Then, go to **Login with Amazon** from **APPS & SERVICES** menu, and then click on **Create a New Security Profile**. Then, go to **Web Settings** menu item to create a new security profile.
 
