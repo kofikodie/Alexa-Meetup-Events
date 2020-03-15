@@ -6,6 +6,7 @@ import {
 } from "ask-sdk-core";
 import { Response, SessionEndedRequest } from "ask-sdk-model";
 import { Location } from "./Location";
+import { Events } from "./api/Events";
 
 const SKILL_NAME = "Meetup Events";
 
@@ -31,7 +32,7 @@ const MeetupIntentHandler: RequestHandler = {
       handlerInput.requestEnvelope.request.intent.name === "MeetupIntent"
     );
   },
-  handle(handlerInput: HandlerInput): Response {
+  async handle(handlerInput: HandlerInput): Promise<Response> {
     const location = new Location(handlerInput.requestEnvelope.context);
     if (false === location.isGeolocationSupported()) {
       return handlerInput.responseBuilder
@@ -43,8 +44,10 @@ const MeetupIntentHandler: RequestHandler = {
         ])
         .getResponse();
     }
-    const speechText = "Sono ancora in fase di sviluppo";
-
+    const speechText = await new Events().getEvents(
+      location.getLatitude(),
+      location.getLongitude()
+    );
     return handlerInput.responseBuilder
       .speak(speechText)
       .withSimpleCard(SKILL_NAME, speechText)
