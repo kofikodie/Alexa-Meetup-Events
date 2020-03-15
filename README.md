@@ -2,8 +2,6 @@
 
 A simple Alexa skill to get meetup information, built using the Serverless Framework and the [serverless-alexa-skills](https://github.com/marcy-terui/serverless-alexa-skills) plugin.
 
-This project is a companion for the post [How to build a Serverless Alexa Skill](https://rupakganguly.com/posts/how-to-build-a-serverless-alexa-skill/).
-
 ## Create the project
 
 ```
@@ -102,9 +100,9 @@ In your `serverless.yml` file, add a new `skills` block and paste the `Skill ID`
 ```
 custom:
   alexa:
-    vendorId: ${env:AMAZON_VENDOR_ID}
-    clientId: ${env:AMAZON_CLIENT_ID}
-    clientSecret: ${env:AMAZON_CLIENT_SECRET}
+    vendorId: ${env:VENDOR_ID}
+    clientId: ${env:CLIENT_ID}
+    clientSecret: ${env:CLIENT_SECRET}
     localServerPort: 9000
     skills:
       - id: amzn1.ask.skill.xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx
