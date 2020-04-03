@@ -24,9 +24,11 @@ export class Events {
       response.data.events.forEach((event: EventsEntity) => {
         meetupEvents += `A ${event.venue.city} nella sede di ${event.venue.name} si terrà il meetup sul ${event.name} il ${event.local_date} alle ${event.local_time} organizzato da ${event.group.who} `;
       });
+
       return meetupEvents;
     } catch (error) {
       console.error("Errore risposta api", error);
+
       return "Nessun evento trovato nella tua zona";
     }
   }
